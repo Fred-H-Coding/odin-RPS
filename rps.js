@@ -18,68 +18,102 @@ function getComputerChoice() {
     else {
         choice1 = "scissors";
     }
-    let message = "The computer has chosen " + choice1 + "!";
+    let message = `The computer has chosen ${computerSelection}.`;
     console.log(message);
     computerSelection = choice1;
     return computerSelection;
 }
 
-function getHumanChoice() {
-    var choice2 = prompt("Choose rock, paper, or scissors!");
-    choice2 = choice2.toLowerCase();
-    console.log(`I choose ${choice2}!`);
-    humanSelection = choice2;
-}
+// function getHumanChoice() {
+//     var choice2 = prompt("Choose rock, paper, or scissors!");
+//     choice2 = choice2.toLowerCase();
+//     console.log(`I choose ${choice2}!`);
+//     humanSelection = choice2;
+// }
+
+const rockButton = document.querySelector("#rock");rockButton.addEventListener("click", () => {
+    humanSelection = "rock";
+    getComputerChoice();
+    playRound(humanSelection, computerSelection);
+})
+
+const paperButton = document.querySelector(".paper");
+paperButton.addEventListener("click", () => {
+    humanSelection = "paper";
+    getComputerChoice();
+    playRound(humanSelection, computerSelection);
+})
+
+const scissorsButton = document.querySelector(".scissors");
+scissorsButton.addEventListener("click", () => {
+    humanSelection = "scissors";
+    getComputerChoice();
+    playRound(humanSelection, computerSelection);
+})
+
+const finalResults = document.querySelector("div");
+const computerChoiceResult = document.createElement("p");
+const resultPara = document.createElement("p");
+computerChoiceResult.textContent = `The computer has chosen ${computerSelection}.`
+finalResults.appendChild(computerChoiceResult);
+finalResults.appendChild(resultPara);
+
 
 function playRound (humanChoice, computerChoice) {
+    let result = "";
     if (humanChoice == "rock") {
         if (computerChoice == "paper") {
-            console.log("You lose! Paper beats rock!");
+            resultPara.textContent = "You lose! Paper beats rock!";
+            finalResults.appendChild(resultPara);
             computerScore++;
         }
         else if (computerChoice == humanChoice) {
-            console.log("It's a draw!");
+            resultPara.textContent = "It's a draw!";
+            finalResults.appendChild(resultPara);
             drawScore++;
         }
         else {
-            console.log("You win! Rock beats scissors!");
+            resultPara.textContent = "You win! Rock beats scissors!";
+            finalResults.appendChild(resultPara);
             humanScore++;
         }
     }
 
     else if (humanChoice == "paper") {
         if (computerChoice == "scissors") {
-            console.log("You lose! Scissors beats paper!");
+            resultPara.textContent = "You lose! Scissors beats paper!"
+            finalResults.appendChild(resultPara);
             computerScore++;
         }
         else if (computerChoice == humanChoice) {
-            console.log("It's a draw!");
+            resultPara.textContent = "It's a draw!"
+            finalResults.appendChild(resultPara);
             drawScore++;
         }
         else {
-            console.log("You win! Paper beats rock!");
+            resultPara.textContent = "You win! Paper beats rock!"
+            finalResults.appendChild(resultPara);
             humanScore++;
         }
     }
-
-    else if (humanChoice == undefined) {
-        console.log("You didn't choose rock, paper, or scissors.");
-    }
-
     else {
         if (computerChoice == "rock") {
-            console.log("You lose! Rock beats scissors!");
+            resultPara.textContent = "You lose! Rock beats scissors!"
+            finalResults.appendChild(resultPara);
             computerScore++;
         }
         else if (computerChoice == humanChoice) {
-            console.log("It's a draw!");
+            resultPara.textContent = "It's a draw!"
+            finalResults.appendChild(resultPara);
             drawScore++;
         }
         else {
-            console.log("You win! Scissors beats paper!");
+            resultPara.textContent = "You win! Scissors beats paper!"
+            finalResults.appendChild(resultPara);
             humanScore++;
         }
     }
+    return result;
 }
 
 function playGame() {
